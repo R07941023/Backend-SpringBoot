@@ -13,10 +13,16 @@ import com.dev.template.model.*;
 import com.dev.template.schema.*;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
+import org.springframework.stereotype.Service;
 
 @RestController
 @RequestMapping("/")
 public class TemplateController {
+
+    private static final Logger logger = LoggerFactory.getLogger(TemplateController.class);
 
     @Autowired
     private CalculationBMI calculationBMI;
@@ -27,7 +33,10 @@ public class TemplateController {
         @ApiResponse(responseCode = "400", description = "Bad request")
     })
     @GetMapping({"/template/getPersonSchema"})
-    public ResponseEntity<Map<String, Object>> templateGetPersonSchema() {
+    public ResponseEntity<Map<String, Object>> templateGetPersonSchema(
+        @RequestHeader("UUID") String uuid,
+        @RequestHeader("Authorization") String token) {
+        logger.info("UUID:" + uuid);
         // model
         PersonSchema personSchema = new PersonSchema();
         // view
@@ -36,7 +45,11 @@ public class TemplateController {
         return responseStandardSchema.output();
     }
     @PostMapping({"/template/caulcuteBMI"})
-    public ResponseEntity<Map<String, Object>> templateCaulcuteBMI(@RequestBody PersonSchema personSchema) {
+    public ResponseEntity<Map<String, Object>> templateCaulcuteBMI(
+        @RequestHeader("UUID") String uuid,
+        @RequestHeader("Authorization") String token,
+        @RequestBody PersonSchema personSchema) {
+        logger.info("UUID:" + uuid);
         // model
         Map<String, Object> retData = calculationBMI.process(personSchema);
         // view
