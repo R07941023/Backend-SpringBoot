@@ -1,4 +1,4 @@
-package com.example.template.controller;
+package com.dev.template.controller;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.servers.Server;
