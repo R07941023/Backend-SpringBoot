@@ -1,11 +1,11 @@
-package com.dev.template.schema;
+package com.dev.template.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
-public class ResponseStandardSchema {
+public class ResponseStandardRequest {
     
     @Schema(description = "result code", example = "0")
     private int retCode;
@@ -16,7 +16,7 @@ public class ResponseStandardSchema {
     @Schema(description = "result data", example = "{}")
     private Object retData = new HashMap<>();
 
-    public ResponseStandardSchema() {
+    public ResponseStandardRequest() {
     }
 
     // output

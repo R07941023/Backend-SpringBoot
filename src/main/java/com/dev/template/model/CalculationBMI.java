@@ -1,15 +1,17 @@
 package com.dev.template.model;
-import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
-import com.dev.template.schema.*;
+
+import org.springframework.stereotype.Service;
+
+import com.dev.template.dto.PersonRequest;
 
 @Service
 public class CalculationBMI {
 
-    public Map<String, Object> process(PersonSchema personSchema){
+    public Map<String, Object> process(PersonRequest personRequest){
         Map<String, Object> retData = new HashMap<>();
-        double BMI = compute(personSchema.getHeight(), personSchema.getWeight());
+        double BMI = compute(personRequest.getHeight(), personRequest.getWeight());
         retData.put("BMI", BMI);
         return retData;
     }

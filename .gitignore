@@ -21,6 +21,7 @@ target/
 
 ### log
 *.log
+*.gz
 
 ### NetBeans ###
 /nbproject/private/

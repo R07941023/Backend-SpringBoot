@@ -2,15 +2,21 @@ package com.dev.template.controller;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.PathItem;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.Paths;
 import org.springdoc.core.GroupedOpenApi;
+import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Configuration
 public class OpenApiConfig {
@@ -29,14 +35,10 @@ public class OpenApiConfig {
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer")
                                         .bearerFormat("JWT"))
-                        .addSecuritySchemes("uuid",
-                                new SecurityScheme()
-                                        .type(SecurityScheme.Type.APIKEY)
-                                        .in(SecurityScheme.In.HEADER)
-                                        .name("UUID")))
+                        )
                 .addSecurityItem(new SecurityRequirement()
                         .addList("bearerToken")
-                        .addList("uuid"))
+                        )
                 .info(new Info().title("Spring Boot REST API")
                         .description("Spring Boot REST API with UUID and Token headers")
                         .version("1.0"));

@@ -1,7 +1,7 @@
-package com.dev.template.schema;
+package com.dev.template.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-public class PersonSchema {
+public class PersonRequest {
     @Schema(description = "Name of the person", example = "YYLUI")
     private String name = "YYLUI";
 
