@@ -14,6 +14,20 @@ public class PersonRequest {
     @Schema(description = "weight", example = "68.1")
     private double weight = 68;
 
+    // setting
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public void setHeight(double height) {
+        this.height = height;
+    }
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
     // output
     public String getName() {
         return name;

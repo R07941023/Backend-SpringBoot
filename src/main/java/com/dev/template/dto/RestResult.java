@@ -5,8 +5,8 @@ import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
-public class ResponseStandardRequest {
-    
+public class RestResult {
+
     @Schema(description = "result code", example = "0")
     private int retCode;
 
@@ -14,20 +14,17 @@ public class ResponseStandardRequest {
     private String retDetail;
 
     @Schema(description = "result data", example = "{}")
-    private Object retData = new HashMap<>();
-
-    public ResponseStandardRequest() {
-    }
-
-    // output
-    public ResponseEntity<Map<String, Object>> output(){
-        ResponseEntity res = new ResponseEntity<>(this, HttpStatus.CREATED);
-        return res;
-    }
+    private transient Object retObject;
 
     // set
-    public void setRetData(Object data){
-        this.retData = data;
+    public void setRetCode(int retCode){
+        this.retCode = retCode;
+    }
+    public void setRetDetail(String retDetail){
+        this.retDetail = retDetail;
+    }
+    public void setRetObject(Object retObject){
+        this.retObject = retObject;
     }
 
     // element
@@ -39,7 +36,7 @@ public class ResponseStandardRequest {
         return retDetail;
     }
 
-    public Object getRetData() {
-        return retData;
+    public Object getRetObject() {
+        return retObject;
     }
 }

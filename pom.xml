@@ -71,6 +71,12 @@
 			<version>0.9.1</version>
 		</dependency>
 
+		<!-- Error handler -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
 		<!-- OpenAPI Dependencies -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

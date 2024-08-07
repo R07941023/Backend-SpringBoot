@@ -1,9 +1,7 @@
 package com.dev.template.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,33 +11,25 @@ import com.dev.template.dto.FileUploadRequest;
 @Service
 public class UploadFilesModel {
 
-    public Map<String, Object> getFileNames(FileUploadRequest fileUploadRequest){
-        Map<String, Object> retData = new HashMap<>();
-        List<String> empty_arr = new ArrayList<>();
-        retData.put("names", empty_arr);
-        int retCode = 0;
+    public List<String> getFileNames(FileUploadRequest fileUploadRequest){
+        List<String> names = new ArrayList<>();
         
-        // check the files is empty or not
-        List<String> names_arr = new ArrayList<>();
+        
         List<MultipartFile> files = fileUploadRequest.getFiles();
+        // check the files is empty or not
         if (files.isEmpty()) {
-            retCode = 999;
+            return names;
         }
 
         // get the files name
         for (MultipartFile file : files) {
             if (file.isEmpty()) {
-                retCode = 999;
+                continue;
             }
             String fileName = file.getOriginalFilename();
-            names_arr.add(fileName);
+            names.add(fileName);
         }
-        
-        retData.put("retCode", retCode);
-        if (retCode == 0){
-            retData.put("names", names_arr);
-        }
-        return retData;
+        return names;
     }
     
 }

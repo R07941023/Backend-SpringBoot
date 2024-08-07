@@ -1,6 +1,8 @@
 package com.dev.template.controller;
 import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dev.template.dto.FileUploadRequest;
 import com.dev.template.dto.PersonRequest;
-import com.dev.template.dto.ResponseStandardRequest;
+import com.dev.template.dto.RestResult;
 import com.dev.template.model.CalculationBMI;
 import com.dev.template.model.UploadFilesModel;
+
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -38,55 +41,66 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 })
 public class TemplateController {
 
-    private static final Logger logger = LoggerFactory.getLogger(TemplateController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TemplateController.class);
 
     @Autowired
     private CalculationBMI calculationBMI;
 
     @Autowired
     private UploadFilesModel uploadFilesModel;
-    
-    @Operation(summary = "Get", description = "template")
-    @GetMapping({"/template/getPersonSchema"})
-    public ResponseEntity<Map<String, Object>> templateGetPersonSchema(
-        @RequestHeader("Authorization") String token) {
-        logger.info("UUID:" + "Test");
-        // model
-        PersonRequest personSchema = new PersonRequest();
-        // view
-        ResponseStandardRequest responseStandardRequest = new ResponseStandardRequest();
-        responseStandardRequest.setRetData(personSchema);
-        return responseStandardRequest.output();
-    }
 
+
+    @Operation(summary = "Get", description = "template")
+    @GetMapping({"/template/getPersonRequest"})
+    public RestResult templateGetPersonRequest(
+        @RequestHeader("Authorization") String token) {
+        LOGGER.info("========== TemplateController templateGetPersonRequest START ==========");
+        // View
+        RestResult restResult = new RestResult();
+        List<PersonRequest> personRequests = new ArrayList<>();
+        personRequests.add(new PersonRequest());
+        restResult.setRetCode(0);
+        restResult.setRetDetail("OK");
+        restResult.setRetObject(personRequests);
+        return restResult;
+    }
+    
     @Operation(summary = "Post", description = "template")
     @PostMapping({"/template/caulcuteBMI"})
-    public ResponseEntity<Map<String, Object>> templateCaulcuteBMI(
+    public RestResult templateCaulcuteBMI(
         @RequestHeader("Authorization") String token,
         @RequestBody PersonRequest personRequest) {
-        logger.info("UUID:" + "Test");
-        // model
-        Map<String, Object> retData = calculationBMI.process(personRequest);
-        // view
-        ResponseStandardRequest responseStandardRequest = new ResponseStandardRequest();
-        responseStandardRequest.setRetData(retData);
-        return responseStandardRequest.output();
+        LOGGER.info("========== TemplateController templateCaulcuteBMI START ==========");
+        // Model
+        calculationBMI.exec(personRequest);
+        List<CalculationBMI> retObject = new ArrayList<>();
+        retObject.add(calculationBMI);
+        // View
+        RestResult restResult = new RestResult();
+        restResult.setRetCode(0);
+        restResult.setRetDetail("OK");
+        restResult.setRetObject(retObject);
+        LOGGER.info("========== TemplateController templateCaulcuteBMI END ==========");
+        return restResult;
     }
 
     @Operation(summary = "Post uploads", description = "template")
     @PostMapping(value="/template/uploads", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Map<String, Object>> templateUploads(
+    public RestResult templateUploads(
         @RequestPart("files") List<MultipartFile> files,
         @RequestPart("description") String description){
-        logger.info("UUID:" + "Test");
+        LOGGER.info("========== TemplateController templateUploads START ==========");
         FileUploadRequest fileUploadRequest = new FileUploadRequest();
         fileUploadRequest.setFiles(files);
         fileUploadRequest.setDescription(description);
-        // model
-        Map<String, Object> retData = uploadFilesModel.getFileNames(fileUploadRequest);
-        // view
-        ResponseStandardRequest responseStandardRequest = new ResponseStandardRequest();
-        responseStandardRequest.setRetData(retData);
-        return responseStandardRequest.output();
+        // Model
+        List<String> retObject = uploadFilesModel.getFileNames(fileUploadRequest);
+        // View
+        RestResult restResult = new RestResult();
+        restResult.setRetCode(0);
+        restResult.setRetDetail("OK");
+        restResult.setRetObject(retObject);
+        LOGGER.info("========== TemplateController templateUploads END ==========");
+        return restResult;
     }
 }
