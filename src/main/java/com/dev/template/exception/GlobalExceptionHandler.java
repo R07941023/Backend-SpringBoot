@@ -1,4 +1,4 @@
-package com.dev.template.common;
+package com.dev.template.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

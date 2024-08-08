@@ -1,4 +1,4 @@
-package com.dev.template.common;
+package com.dev.template.exception;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;

@@ -1,5 +1,4 @@
 package com.dev.template.controller;
-import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -8,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,7 +51,8 @@ public class TemplateController {
     @Operation(summary = "Get", description = "template")
     @GetMapping({"/template/getPersonRequest"})
     public RestResult templateGetPersonRequest(
-        @RequestHeader("Authorization") String token) {
+        @RequestHeader("Authorization") String token
+        ){
         LOGGER.info("========== TemplateController templateGetPersonRequest START ==========");
         // View
         RestResult restResult = new RestResult();
@@ -62,6 +61,7 @@ public class TemplateController {
         restResult.setRetCode(0);
         restResult.setRetDetail("OK");
         restResult.setRetObject(personRequests);
+        LOGGER.info("========== TemplateController templateGetPersonRequest END ==========");
         return restResult;
     }
     
