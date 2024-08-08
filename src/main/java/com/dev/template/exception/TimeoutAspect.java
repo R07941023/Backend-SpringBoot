@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.*;
 
+import com.dev.constant.CommConstant;
 import com.dev.template.dto.RestResult;
 
 @Aspect
@@ -32,12 +33,12 @@ public class TimeoutAspect {
         } catch (TimeoutException e) {
             future.cancel(true);
             errorMessage = "task timeout";
-            restResult.setRetCode(-1);
+            restResult.setRetCode(CommConstant.RET_CD_TIMEOUT);
             restResult.setRetDetail(errorMessage);
         } catch (InterruptedException | ExecutionException e) {
             errorMessage = "task fail " + e.getMessage();
             e.printStackTrace();
-            restResult.setRetCode(-1);
+            restResult.setRetCode(CommConstant.RET_CD_TIMEOUT_FAIL);
             restResult.setRetDetail(errorMessage);
         } finally {
             executor.shutdown();

@@ -1,13 +1,5 @@
 package com.dev.template.controller;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dev.template.dto.RestResult;
 import com.dev.template.exception.Timeout;
+import com.dev.constant.CommConstant;
 
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +21,7 @@ public class TemplateErrorController {
 
     @Operation(summary = "Get", description = "template")
     @GetMapping({"/template/getTimeoutError"})
-    @Timeout(50)
+    @Timeout(CommConstant.DEFAULT_TIMEOUT)
     public RestResult templateGetTimeoutError() throws InterruptedException{
         LOGGER.info("========== TemplateController templateGetTimeoutError START ==========");
         Thread.sleep(100);

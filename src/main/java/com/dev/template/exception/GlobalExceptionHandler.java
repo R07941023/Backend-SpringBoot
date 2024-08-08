@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import com.dev.constant.CommConstant;
 
 import com.dev.template.dto.RestResult;
 
@@ -19,7 +20,7 @@ public class GlobalExceptionHandler {
         LOGGER.error("Exception occurred: ", ex);
 
         RestResult restResult = new RestResult();
-        restResult.setRetCode(-1);
+        restResult.setRetCode(CommConstant.RET_CD_FAIL);
         restResult.setRetDetail(ExceptionUtil.getStackTracetring(ex));
         
         return new ResponseEntity<>(restResult, HttpStatus.INTERNAL_SERVER_ERROR);

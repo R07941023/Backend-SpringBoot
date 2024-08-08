@@ -1,3 +1,2 @@
-git remote set-url origin 
-github = git@github.com:R07941023/Backend-SpringBoot.git
-gitlab = git@gitlab:YYLUI/springboot_template.git
+git remote set-url origin git@github.com:R07941023/Backend-SpringBoot.git
+git remote set-url origin gitlab = git@gitlab:YYLUI/springboot_template.git

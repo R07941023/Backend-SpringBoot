@@ -21,7 +21,7 @@ import com.dev.template.dto.PersonRequest;
 import com.dev.template.dto.RestResult;
 import com.dev.template.model.CalculationBMI;
 import com.dev.template.model.UploadFilesModel;
-
+import com.dev.constant.CommConstant;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -58,8 +58,8 @@ public class TemplateController {
         RestResult restResult = new RestResult();
         List<PersonRequest> personRequests = new ArrayList<>();
         personRequests.add(new PersonRequest());
-        restResult.setRetCode(0);
-        restResult.setRetDetail("OK");
+        restResult.setRetCode(CommConstant.RET_CD_SUCCESS);
+        restResult.setRetDetail(CommConstant.SUCCESS);
         restResult.setRetObject(personRequests);
         LOGGER.info("========== TemplateController templateGetPersonRequest END ==========");
         return restResult;
@@ -77,8 +77,8 @@ public class TemplateController {
         retObject.add(calculationBMI);
         // View
         RestResult restResult = new RestResult();
-        restResult.setRetCode(0);
-        restResult.setRetDetail("OK");
+        restResult.setRetCode(CommConstant.RET_CD_SUCCESS);
+        restResult.setRetDetail(CommConstant.SUCCESS);
         restResult.setRetObject(retObject);
         LOGGER.info("========== TemplateController templateCaulcuteBMI END ==========");
         return restResult;
@@ -97,8 +97,8 @@ public class TemplateController {
         List<String> retObject = uploadFilesModel.getFileNames(fileUploadRequest);
         // View
         RestResult restResult = new RestResult();
-        restResult.setRetCode(0);
-        restResult.setRetDetail("OK");
+        restResult.setRetCode(CommConstant.RET_CD_SUCCESS);
+        restResult.setRetDetail(CommConstant.SUCCESS);
         restResult.setRetObject(retObject);
         LOGGER.info("========== TemplateController templateUploads END ==========");
         return restResult;
