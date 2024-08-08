@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.Operation;
 @RequestMapping("/")
 public class TemplateErrorController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TemplateController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TemplateFunctionController.class);
 
     @Operation(summary = "Get", description = "template")
     @GetMapping({"/template/getTimeoutError"})

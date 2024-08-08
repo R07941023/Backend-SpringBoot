@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +39,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
     @ApiResponse(responseCode = "404", description = "Not Found"),
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
 })
-public class TemplateController {
+public class TemplateFunctionController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TemplateController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TemplateFunctionController.class);
 
     @Autowired
     private CalculationBMI calculationBMI;
@@ -81,6 +83,34 @@ public class TemplateController {
         restResult.setRetDetail(CommConstant.SUCCESS);
         restResult.setRetObject(retObject);
         LOGGER.info("========== TemplateController templateCaulcuteBMI END ==========");
+        return restResult;
+    }
+
+    @Operation(summary = "Put", description = "template")
+    @PutMapping({"/template/putData"})
+    public RestResult templatePutData(
+        @RequestHeader("Authorization") String token,
+        @RequestBody PersonRequest personRequest) {
+        LOGGER.info("========== TemplateController templatePutData START ==========");
+        // View
+        RestResult restResult = new RestResult();
+        restResult.setRetCode(CommConstant.RET_CD_SUCCESS);
+        restResult.setRetDetail(CommConstant.SUCCESS);
+        LOGGER.info("========== TemplateController templatePutData END ==========");
+        return restResult;
+    }
+
+    @Operation(summary = "Delete", description = "template")
+    @DeleteMapping({"/template/deleteData"})
+    public RestResult templateDeleteData(
+        @RequestHeader("Authorization") String token,
+        @RequestBody PersonRequest personRequest) {
+        LOGGER.info("========== TemplateController templateDeleteData START ==========");
+        // View
+        RestResult restResult = new RestResult();
+        restResult.setRetCode(CommConstant.RET_CD_SUCCESS);
+        restResult.setRetDetail(CommConstant.SUCCESS);
+        LOGGER.info("========== TemplateController templateDeleteData END ==========");
         return restResult;
     }
 
