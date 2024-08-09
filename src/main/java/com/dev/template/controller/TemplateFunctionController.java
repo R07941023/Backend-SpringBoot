@@ -25,6 +25,7 @@ import com.dev.template.dto.RestResult;
 import com.dev.template.model.CalculationBMI;
 import com.dev.template.model.UploadFilesModel;
 import com.dev.constant.CommConstant;
+import com.dev.constant.URIConstant;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -52,7 +53,7 @@ public class TemplateFunctionController {
 
 
     @Operation(summary = "Get", description = "template")
-    @GetMapping({"/template/getPersonRequest"})
+    @GetMapping({URIConstant.URI_GET_TEMPLATE_PERSONREQUEST})
     public RestResult templateGetPersonRequest(
         @RequestHeader("Authorization") String token
         ){
@@ -69,7 +70,7 @@ public class TemplateFunctionController {
     }
     
     @Operation(summary = "Post", description = "template")
-    @PostMapping({"/template/caulcuteBMI"})
+    @PostMapping({URIConstant.URI_POST_TEMPLATE_CALCULATEBMI})
     public RestResult templateCaulcuteBMI(
         @RequestHeader("Authorization") String token,
         @RequestBody PersonRequest personRequest) {
@@ -88,7 +89,7 @@ public class TemplateFunctionController {
     }
 
     @Operation(summary = "Put", description = "template")
-    @PutMapping({"/template/putData"})
+    @PutMapping({URIConstant.URI_PUT_TEMPLATE_DATA})
     public RestResult templatePutData(
         @RequestHeader("Authorization") String token,
         @RequestBody PersonRequest personRequest) {
@@ -102,7 +103,7 @@ public class TemplateFunctionController {
     }
 
     @Operation(summary = "Delete", description = "template")
-    @DeleteMapping({"/template/deleteData"})
+    @DeleteMapping({URIConstant.URI_DELETE_TEMPLATE_DATA})
     public RestResult templateDeleteData(
         @RequestHeader("Authorization") String token,
         @RequestBody PersonRequest personRequest) {
@@ -116,7 +117,7 @@ public class TemplateFunctionController {
     }
 
     @Operation(summary = "Post uploads", description = "template")
-    @PostMapping(value="/template/uploads", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value=URIConstant.URI_POST_TEMPLATE_UPLOADS, consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public RestResult templateUploads(
         @RequestPart("files") List<MultipartFile> files,
         @RequestParam("description") String description){

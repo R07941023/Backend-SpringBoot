@@ -4,10 +4,9 @@ import com.dev.template.MicroserviceDemoApplication;
 import com.dev.template.controller.TemplateFunctionController;
 import com.dev.template.dto.PersonRequest;
 import com.dev.constant.CommConstant;
+import com.dev.constant.URIConstant;
 
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
@@ -56,7 +55,7 @@ public class TemplateFunctionControllerTest {
 		httpHeaders.set(HttpHeaders.AUTHORIZATION, "Bearer token");
 		
 		// testing
-		mockMvc.perform(MockMvcRequestBuilders.get("/template/getPersonRequest")
+		mockMvc.perform(MockMvcRequestBuilders.get(URIConstant.URI_GET_TEMPLATE_PERSONREQUEST)
 			.headers(httpHeaders).accept(MediaType.APPLICATION_JSON))
 			// .andDo(MockMvcResultHandlers.print())
 			// .andDo(print())
@@ -81,7 +80,7 @@ public class TemplateFunctionControllerTest {
         httpHeaders.set(HttpHeaders.AUTHORIZATION, "Bearer token");
 
         // testing
-        mockMvc.perform(MockMvcRequestBuilders.post("/template/caulcuteBMI")
+        mockMvc.perform(MockMvcRequestBuilders.post(URIConstant.URI_POST_TEMPLATE_CALCULATEBMI)
                 .headers(httpHeaders)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(personRequestJson))
@@ -100,7 +99,7 @@ public class TemplateFunctionControllerTest {
         String description = "Sample description";
 
         // testing
-        mockMvc.perform(MockMvcRequestBuilders.multipart("/template/uploads")
+        mockMvc.perform(MockMvcRequestBuilders.multipart(URIConstant.URI_POST_TEMPLATE_UPLOADS)
                 .file(file1)
                 .param("description", description)
                 .contentType(MediaType.MULTIPART_FORM_DATA))
@@ -127,7 +126,7 @@ public class TemplateFunctionControllerTest {
         httpHeaders.set(HttpHeaders.AUTHORIZATION, "Bearer token");
 
         // testing
-        mockMvc.perform(MockMvcRequestBuilders.put("/template/putData")
+        mockMvc.perform(MockMvcRequestBuilders.put(URIConstant.URI_PUT_TEMPLATE_DATA)
 			.headers(httpHeaders)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(personRequestJson))
@@ -153,7 +152,7 @@ public class TemplateFunctionControllerTest {
         httpHeaders.set(HttpHeaders.AUTHORIZATION, "Bearer token");
 
         // testing
-        mockMvc.perform(MockMvcRequestBuilders.delete("/template/deleteData")
+        mockMvc.perform(MockMvcRequestBuilders.delete(URIConstant.URI_DELETE_TEMPLATE_DATA)
 			.headers(httpHeaders)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(personRequestJson))
