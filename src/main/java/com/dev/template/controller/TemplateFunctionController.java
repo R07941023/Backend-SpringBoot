@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -118,7 +119,7 @@ public class TemplateFunctionController {
     @PostMapping(value="/template/uploads", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public RestResult templateUploads(
         @RequestPart("files") List<MultipartFile> files,
-        @RequestPart("description") String description){
+        @RequestParam("description") String description){
         LOGGER.info("========== TemplateController templateUploads START ==========");
         FileUploadRequest fileUploadRequest = new FileUploadRequest();
         fileUploadRequest.setFiles(files);
