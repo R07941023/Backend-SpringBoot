@@ -1,4 +1,4 @@
-package com.example.test;
+package com.dev.template.controller;
 
 import com.dev.template.MicroserviceDemoApplication;
 import com.dev.template.controller.TemplateFunctionController;
